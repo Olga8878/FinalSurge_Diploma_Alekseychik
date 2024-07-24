@@ -11,11 +11,13 @@ import utils.PropertyReader;
 public class ImportDataTests extends BaseTest {
 
     public ImportDataPage importDataPage;
+
     @BeforeMethod(alwaysRun = true)
-    public void loginAndMoveToPrintWorkouts(){
+    public void loginAndMoveToPrintWorkouts() {
         DashboardPage dashboardPage = loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
         importDataPage = dashboardPage.navigateToImportData();
     }
+
     @Test(groups = "negative")
     public void verifyUploadWithoutFileOnImportData() {
         importDataPage.clickToUploadFile();
@@ -26,9 +28,9 @@ public class ImportDataTests extends BaseTest {
 
     @Test(groups = "positive")
     public void verifyUploadFileOnImportData() {
-        String fileName = System.getProperty("user.dir") + "/src/test/resources/testFile.csv";
+        String fileName = System.getProperty("user.dir") + "/src/test/resources/testFile.fit";
         importDataPage.uploadFile(fileName);
-        //Assert.assertEquals(importDataPage.getDataImportStatusTxt(),
-        //        "You did not upload a valid import file. Please choose a valid file and try again.");
+        Assert.assertEquals(importDataPage.getDataImportStatusTxt(),
+                "You did not upload a valid import file. Please choose a valid file and try again.");
     }
 }
