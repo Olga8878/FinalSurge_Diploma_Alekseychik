@@ -25,24 +25,3 @@ public class DropDown {
 }
 
 
-//    String dropDownLocator = "%s";
-//    String optionDropDown = "//option[text()='%s'] | //li[text()='%s'] | //select[@id='PDistType']/option[text()='%s']";
-//
-//    WebDriver driver;
-//    String id;
-//
-//    public DropDown(WebDriver driver, String label) {
-//        this.driver = driver;
-//        this.id = label;
-//    }
-//
-//    @Step("Select an option from the dropDown")
-//    public void selectOption(String option) {
-//        log.info("Click on dropdown with id: " + this.id);
-//        driver.findElement(By.id(String.format(dropDownLocator, this.id))).click();
-//        log.info("Select option on the DropDown by xpath: " + option + "and click");
-//        driver.findElement(By.xpath(String.format(optionDropDown, option, option, option))).click();
-//
-//    }
-//}
-

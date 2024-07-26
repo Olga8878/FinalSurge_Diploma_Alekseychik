@@ -21,11 +21,12 @@ public abstract class BaseTest {
         testContext.setAttribute("driver", driver);
         loginPage = new LoginPage();
         loginPage.openURL();
+        driver.manage().deleteAllCookies();
         Assert.assertTrue(loginPage.isPageOpened(),"The page is NOT opened.");
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        driver.quit();
+        DriverFactory.getInstance().tearDown();
     }
 }

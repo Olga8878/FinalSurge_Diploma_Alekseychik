@@ -12,7 +12,7 @@ public class DashboardPage extends BasePage {
     public final By addWorkout = By.xpath("//a[text()='Add Workout']");
     public final By importData = By.xpath("//a[text()='Import Data']");
     public final By gearRoutesHeader = By.xpath("//a[text()='Gear & Routes']");
-    public final By shoes = By.xpath("//a[text()='Shoes']");
+    public final By bike = By.xpath("//a[text()='Bikes']");
     public final By dailyVitalsHeader = By.xpath("//a[text()='Daily Vitals']");
     public final By viewAddVitals = By.xpath("//a[text()='View & Add Vitals']");
     public final By dashboardButton = By.xpath("//*[@class='icsw16-home']");
@@ -20,6 +20,7 @@ public class DashboardPage extends BasePage {
     public final By workoutCalculators = By.cssSelector("[data-reveal-id='IntensityCalc']");
     public final By otherCalculators = By.cssSelector("[data-reveal-id='OtherCalc']");
     public final By logoutLink = By.xpath("//a[text()='Logout']");
+    public final By otherCalculatorsFrame = By.id("OtherCalciFrame");
     public static final By logoutMessage = By.cssSelector("[class^='alert']");
     public final By printWorkoutsLink = By.xpath("//a[@data-reveal-id='PrintWorkouts']/i");
 
@@ -38,6 +39,17 @@ public class DashboardPage extends BasePage {
         Actions action = new Actions(driver);
         action.moveToElement(driver.findElement(workoutHeader)).build().perform();
     }
+    private void moveToGearRoutesHeader() {
+        Actions action = new Actions(driver);
+        action.moveToElement(driver.findElement(gearRoutesHeader)).build().perform();
+    }
+    @Step
+    public BikePage navigateToAddBike() {
+        moveToGearRoutesHeader();
+        driver.findElement(bike).click();
+        return new BikePage();
+    }
+
 
     @Step
     public ImportDataPage navigateToImportData() {
@@ -64,12 +76,17 @@ public class DashboardPage extends BasePage {
         return new WorkoutQuickAddPage();
     }
 
-    @Step("Clicking 'Other Calculators'")
-    public OtherCalculatorsPage clickOtherCalculators() {
-        driver.findElement(otherCalculators).click();
-        return new OtherCalculatorsPage();
-    }
-
+//    @Step("Clicking 'Other Calculators'")
+//    public OtherCalculatorsPage clickOtherCalculators() {
+//        driver.findElement(otherCalculators).click();
+//        return new OtherCalculatorsPage();
+//    }
+@Step("Clicking 'Other Calculators'")
+public OtherCalculatorsPage clickOtherCalculators() {
+    driver.findElement(otherCalculators).click();
+    driver.switchTo().frame(driver.findElement(otherCalculatorsFrame));
+    return new OtherCalculatorsPage();
+}
     @Step("Clicking 'Print Workouts' link")
     public PrintWorkoutsPage clickPrintWorkouts() {
         driver.findElement(printWorkoutsLink).click();

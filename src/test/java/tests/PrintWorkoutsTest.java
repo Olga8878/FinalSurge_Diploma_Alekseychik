@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
+import pages.LoginPage;
 import pages.base.BaseTest;
 import pages.PrintWorkoutsPage;
 import utils.PropertyReader;
@@ -14,6 +15,7 @@ public class PrintWorkoutsTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void loginAndMoveToPrintWorkouts(){
+        LoginPage loginPage = new LoginPage();
         DashboardPage dashboardPage = loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
         printWorkoutsPage = dashboardPage.clickPrintWorkouts();
     }

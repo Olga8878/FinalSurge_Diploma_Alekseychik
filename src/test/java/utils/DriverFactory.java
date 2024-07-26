@@ -21,8 +21,8 @@ public class DriverFactory {
     }
 
     @SneakyThrows
-    public WebDriver getDriver()  {
-        if(isDriverNull()) {
+    public WebDriver getDriver() {
+        if (isDriverNull()) {
             switch (PropertyReader.getProperty("browser_name")) {
                 case "chrome" -> {
                     ChromeOptions options = new ChromeOptions();
@@ -39,7 +39,11 @@ public class DriverFactory {
         return driver;
     }
 
-    private boolean isDriverNull(){
+    private boolean isDriverNull() {
         return driver == null;
+    }
+
+    public void tearDown() {
+        getDriver().quit();
     }
 }

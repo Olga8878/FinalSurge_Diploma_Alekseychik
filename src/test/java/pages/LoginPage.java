@@ -51,6 +51,7 @@ public class LoginPage extends BasePage {
     @Step
     public DashboardPage login(String email, String password) {
         logger.info("Log in with email = {}, password = {}", email, password);
+        openURL();
         clickLogInLink();
         setEmailValue(email);
         setPasswordValue(password);
