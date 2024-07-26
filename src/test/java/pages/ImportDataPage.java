@@ -1,5 +1,6 @@
 package pages;
 
+import decorators.DropDown;
 import org.openqa.selenium.By;
 import pages.base.BasePage;
 
@@ -10,13 +11,19 @@ public class ImportDataPage extends BasePage {
     private final By dataImportStatus = By.xpath("//h3[@id='thestatus']");
 
     private final By uploadFileBtn = By.id("saveButton");
+    private final By dropdown = By.id("LogType");
 
     public ImportDataPage() {
         super();
     }
+
     public void uploadFile(String fileName){
         selectFile(fileName);
         clickToUploadFile();
+    }
+    public DropDown getDropDown(){
+        return new DropDown(driver, "LogType");
+
     }
 
     private void selectFile(String fileName){

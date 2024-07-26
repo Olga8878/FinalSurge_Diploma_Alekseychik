@@ -1,7 +1,7 @@
 package tests;
 
 import models.WorkoutQuickAdd;
-import models.WorkoutQuickAddFactory;
+import utils.TestDataFactory.WorkoutQuickAddFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,6 +29,7 @@ public class WorkoutQuickAddTest extends BaseTest {
                 "A quick workout has not been added");
     }
 }
+
 
 
 

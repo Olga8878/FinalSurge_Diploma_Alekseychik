@@ -1,6 +1,7 @@
-package models;
+package utils.TestDataFactory;
 
 import com.github.javafaker.Faker;
+import models.WorkoutQuickAdd;
 
 public class WorkoutQuickAddFactory {
 

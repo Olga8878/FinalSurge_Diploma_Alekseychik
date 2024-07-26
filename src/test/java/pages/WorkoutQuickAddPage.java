@@ -21,6 +21,7 @@ public class WorkoutQuickAddPage extends BasePage {
 
     @Step("Add workout through the quick add")
     public void fillInFormQuickWorkout(WorkoutQuickAdd workoutQuickAdd) {
+        log.info("Fill in the data " + workoutQuickAdd);
         new Input(driver, "WorkoutDate").setValue(workoutQuickAdd.getDate());
         new DropDown(driver, "WorkoutTime").selectOption(workoutQuickAdd.getTime());
         new DropDown(driver, "ActivityType").selectOption(workoutQuickAdd.getActivityType());
@@ -41,7 +42,6 @@ public class WorkoutQuickAddPage extends BasePage {
         new DropDown(driver, "PerEffort").selectOption(workoutQuickAdd.getPerceivedEffort());
         new TextArea(driver, "PostDesc").write(workoutQuickAdd.getPostDesc());
         new Checkboxes(driver, "SaveLibrary").tickCheckbox(workoutQuickAdd.isSaveLibrary());
-        log.info("Fill in the data " + workoutQuickAdd);
         clickSaveButton();
     }
 

@@ -6,11 +6,9 @@ import org.openqa.selenium.*;
 
 @Log4j2
 public class Checkboxes {
+    private final WebDriver driver;
+    private final String id;
 
-    String checkboxesDownLocator = "%s";
-
-    WebDriver driver;
-    String id;
 
     public Checkboxes(WebDriver driver, String label) {
         this.driver = driver;
@@ -19,9 +17,8 @@ public class Checkboxes {
 
     @Step("Tick checkbox as {isTrue}")
     public void tickCheckbox(boolean isTrue) {
-        driver.findElement(By.id(String.format(checkboxesDownLocator, this.id))).click();
         log.info("Tick checkbox " + isTrue);
-
+        driver.findElement(By.id(this.id)).click();
     }
 }
 

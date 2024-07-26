@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 @Log4j2
 public class TextArea {
 
-    String textAreaLocator = "%s";
-
     WebDriver driver;
     String id;
 
@@ -20,7 +18,7 @@ public class TextArea {
 
     @Step("Write the text in TextArea")
     public void write(String text) {
-        driver.findElement(By.id(String.format(textAreaLocator, this.id))).sendKeys(text);
+        driver.findElement(By.id(this.id)).sendKeys(text);
         log.info("Write " + text + " into Text Area with id " + this.id);
 
     }
