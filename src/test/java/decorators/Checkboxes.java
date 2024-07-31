@@ -1,5 +1,4 @@
 package decorators;
-
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
@@ -8,7 +7,6 @@ import org.openqa.selenium.*;
 public class Checkboxes {
     private final WebDriver driver;
     private final String id;
-
 
     public Checkboxes(WebDriver driver, String label) {
         this.driver = driver;

@@ -16,11 +16,11 @@ public class WorkoutQuickAddTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void loginAndMoveToPrintWorkouts() {
+//        LoginPage loginPage = new LoginPage();
         DashboardPage dashboardPage = loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
         calendarPage = dashboardPage.clickCalendar();
     }
-
-    @Test(description = "Filling form Quick Workout")
+    @Test(groups = "positive")
     public void addQuickWorkout() {
         WorkoutQuickAddPage workoutQuickAddPage = calendarPage.clickQuickAdd();
         WorkoutQuickAdd workoutQuickAdd = WorkoutQuickAddFactory.fillWorkoutQuickData();

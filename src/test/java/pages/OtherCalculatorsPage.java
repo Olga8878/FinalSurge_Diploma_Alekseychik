@@ -13,31 +13,31 @@ public class OtherCalculatorsPage extends BasePage {
     private final By errorMsg = By.xpath("//div[contains(@class,'alert alert-error')]");
     private final By trainingCalories = By.xpath("//table[contains(@class,'table table-condensed')]//td[2]");
 
-    private void enterWeight(String value){
+    private void enterWeight(String value) {
         driver.findElement(weightInput).sendKeys(value);
     }
 
-    private void enterHeight(String value){
+    private void enterHeight(String value) {
         driver.findElement(heightInput).sendKeys(value);
     }
 
-    private void enterAge(String value){
+    private void enterAge(String value) {
         driver.findElement(ageInput).sendKeys(value);
     }
 
-    private void enterRunDistance(String value){
+    private void enterRunDistance(String value) {
         driver.findElement(todaysRunInput).sendKeys(value);
     }
 
-    private void clickToCalcBtn(){
+    private void clickToCalcBtn() {
         driver.findElement(calcBtn).click();
     }
 
-    private void selectGender(Gender gender){
+    private void selectGender(Gender gender) {
         driver.findElement(By.id(gender.getLocator())).click();
     }
 
-    public void enterDataForCalculation(String weight, String height, String age, String runDistance, Gender gender){
+    public void enterDataForCalculation(String weight, String height, String age, String runDistance, Gender gender) {
         enterWeight(weight);
         enterHeight(height);
         enterAge(age);
@@ -46,11 +46,11 @@ public class OtherCalculatorsPage extends BasePage {
         clickToCalcBtn();
     }
 
-    public String getErrorMsg(){
+    public String getErrorMsg() {
         return driver.findElement(errorMsg).getText();
     }
 
-    public String getTrainingCalories(){
+    public String getTrainingCalories() {
         return driver.findElement(trainingCalories).getText();
     }
 
@@ -60,11 +60,11 @@ public class OtherCalculatorsPage extends BasePage {
 
         private final String name;
 
-        Gender(String name){
+        Gender(String name) {
             this.name = name;
         }
 
-        public String getLocator(){
+        public String getLocator() {
             return this.name;
         }
     }

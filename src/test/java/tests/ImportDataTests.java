@@ -22,7 +22,7 @@ public class ImportDataTests extends BaseTest {
     public void verifyUploadWithoutFileOnImportData() {
         importDataPage.clickToUploadFile();
         Assert.assertEquals(importDataPage.getDataImportStatusTxt(),
-                "You did not upload a valid import file. Please choose a valid file and try again.");
+                "You did not upload a valid import fil. Please choose a valid file and try again.");
 
     }
 

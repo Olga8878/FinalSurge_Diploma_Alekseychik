@@ -9,12 +9,9 @@ import pages.base.BasePage;
 @Log4j2
 public class CalendarPage extends BasePage {
 
-    public static final By settingsButton = By.xpath("//a[contains( text(),'Settings')]");
-    public static final By calendarPageTitle = By.xpath("//span[text()='View, Edit and Add workouts.']");
-    public static final By quickAddButton = By.id("QuickAddToggle");
+    public final By quickAddButton = By.id("QuickAddToggle");
 
     String addedQuickWorkout = "//a[@class='dropdown-toggle detailslink']";
-
 
     public CalendarPage() {
         super();

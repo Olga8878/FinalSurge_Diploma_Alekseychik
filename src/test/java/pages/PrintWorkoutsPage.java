@@ -12,7 +12,7 @@ public class PrintWorkoutsPage extends BasePage {
     private final By printWorkoutsBtn = By.xpath("//input[@id='saveButtonPrint']");
     private final By error = By.xpath("//div[@class='alert alert-error']");
 
-    public void print(String startDate, String endDate){
+    public void print(String startDate, String endDate) {
         switchToFrame();
         enterStartDate(startDate);
         enterEndDate(endDate);
@@ -20,33 +20,35 @@ public class PrintWorkoutsPage extends BasePage {
         switchToSecondWindow();
     }
 
-    public String getErrorText(){
+    public String getErrorText() {
         return driver.findElement(error).getText();
     }
 
-    private void switchToSecondWindow(){
-        Object[] windowHandles=driver.getWindowHandles().toArray();
+    private void switchToSecondWindow() {
+        Object[] windowHandles = driver.getWindowHandles().toArray();
         driver.switchTo().window((String) windowHandles[1]);
     }
-    private void switchToFrame(){
+
+    private void switchToFrame() {
         driver.switchTo().frame(driver.findElement(iframe));
     }
 
-    private void enterStartDate(String startDate){
+    private void enterStartDate(String startDate) {
         driver.findElement(printStartDate).sendKeys(startDate);
     }
 
-    private void enterEndDate(String endDate){
+    private void enterEndDate(String endDate) {
         driver.findElement(printEndDate).sendKeys(endDate);
     }
 
-    private void clickPrintWorkouts(){
+    private void clickPrintWorkouts() {
         driver.findElement(printWorkoutsBtn).click();
     }
 
-    public boolean isLogoDisplayed(){
+    public boolean isLogoDisplayed() {
         return driver.findElement(img).isDisplayed();
     }
+
     @Override
     public boolean isPageOpened() {
         return false;

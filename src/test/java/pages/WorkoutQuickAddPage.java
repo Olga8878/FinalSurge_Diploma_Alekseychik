@@ -13,7 +13,7 @@ import pages.base.BasePage;
 @Log4j2
 public class WorkoutQuickAddPage extends BasePage {
 
-    public static final By addWorkoutButton = By.id("saveButton");
+    public final By addWorkoutButton = By.id("saveButton");
 
     public WorkoutQuickAddPage() {
         super();

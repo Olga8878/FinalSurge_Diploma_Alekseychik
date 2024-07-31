@@ -1,36 +1,37 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchWindowException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
+import utils.DriverFactory;
 import utils.PropertyReader;
 
-public class LoginPage extends BasePage {
-    public final By logInLink = By.xpath("//span[contains(text(), 'Log In')]");
-    public final By loginEmail = By.cssSelector("input[name=email]");
-    public final By loginPassword = By.cssSelector("input[name=password]");
-    public final By signInButton = By.xpath("//span[contains(text(), 'Sign In')]");
+import java.util.Set;
 
-    public final By continueWithClassic = By.xpath("//span[contains(text(), 'Continue with Classic')]");
+public class LoginPage extends BasePage {
+    protected final Logger logger = LogManager.getLogger(this.getClass().getName());
+    public final By loginEmail = By.id("login_name");
+    public final By loginPassword = By.id("login_password");
+    public final By signInButton = By.xpath("//button[text()=\"Login\"]");
+
 
     public LoginPage() {
         super();
     }
 
-    @Step
-    public void openURL() {
-        driver.get(PropertyReader.getProperty("base_url"));
-    }
     @Override
     public boolean isPageOpened() {
-        wait.until(ExpectedConditions.elementToBeClickable(logInLink));
-        return true;
+        return false;
     }
 
     @Step
-    private void clickLogInLink() {
-        driver.findElement(logInLink).click();
+    public void openURL() {
+        driver.get(PropertyReader.getProperty("base_url"));
     }
 
     @Step
@@ -52,16 +53,37 @@ public class LoginPage extends BasePage {
     public DashboardPage login(String email, String password) {
         logger.info("Log in with email = {}, password = {}", email, password);
         openURL();
-        clickLogInLink();
         setEmailValue(email);
         setPasswordValue(password);
         clickSignInButton();
-        clickToContinueWithClassic();
         return new DashboardPage();
     }
 
-    @Step
-    private void clickToContinueWithClassic(){
-        driver.findElement(continueWithClassic).click();
+    public void checkWebDriver() {
+        DriverFactory.getInstance().getDriver().getCurrentUrl();
+    }
+
+    public void closeSubWindows() {
+        try {
+            closeAllSubWindows();
+        } catch (NoSuchWindowException noSuchWindowException) {
+            logger.warn("No such window exception: {}", noSuchWindowException.getMessage());
+        } catch (WebDriverException ex) {
+            logger.warn("It looks like driver is not available: {}", ex.getMessage());
+        } catch (Exception ex) {
+            logger.warn("Unexpected error during closing: {}", ex.getMessage());
+        }
+    }
+
+    private void closeAllSubWindows() {
+        String defaultWindow = DriverFactory.getInstance().getInitialWindowHandle();
+        Set<String> windows = driver.getWindowHandles();
+        for (String window : windows) {
+            if (!window.equals(defaultWindow)) {
+                driver.switchTo().window(window);
+                driver.close();
+            }
+        }
+        driver.switchTo().window(defaultWindow);
     }
 }

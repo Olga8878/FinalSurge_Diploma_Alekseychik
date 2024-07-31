@@ -15,6 +15,10 @@ public class Input {
         this.id = label;
     }
 
+    public Input(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public void setValue(String text) {
         driver.findElement(By.id(String.format(this.id))).clear();
         log.info("Clear input with id  " + this.id);
@@ -22,16 +26,11 @@ public class Input {
         log.info("Write into input with label: " + id + "text: " + text);
     }
 
-    public void setValue2(By locator, String value) {
+    public void setValueByModal(By locator, String value) {
         log.info(String.format("setting input: value = %s", value));
         driver.findElement(locator).sendKeys(value);
     }
 
-    public void clear(By locator) {
-        WebElement inputElement = driver.findElement(locator);
-        inputElement.clear();
-        log.info("Clear input with locator " + locator);
-    }
 
 }
 

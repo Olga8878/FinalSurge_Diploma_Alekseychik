@@ -17,24 +17,25 @@ public class ImportDataPage extends BasePage {
         super();
     }
 
-    public void uploadFile(String fileName){
+    public void uploadFile(String fileName) {
         selectFile(fileName);
         clickToUploadFile();
     }
-    public DropDown getDropDown(){
+
+    public DropDown getDropDown() {
         return new DropDown(driver, "LogType");
 
     }
 
-    private void selectFile(String fileName){
+    private void selectFile(String fileName) {
         driver.findElement(inputSelectFile).sendKeys(fileName);
     }
 
-    public void clickToUploadFile(){
+    public void clickToUploadFile() {
         driver.findElement(uploadFileBtn).click();
     }
 
-    public String getDataImportStatusTxt(){
+    public String getDataImportStatusTxt() {
         return driver.findElement(dataImportStatus).getText();
     }
 
