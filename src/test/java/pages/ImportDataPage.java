@@ -1,7 +1,9 @@
 package pages;
 
 import decorators.DropDown;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
 public class ImportDataPage extends BasePage {
@@ -17,30 +19,36 @@ public class ImportDataPage extends BasePage {
         super();
     }
 
+    @Step("Upload file: {fileName}")
     public void uploadFile(String fileName) {
         selectFile(fileName);
         clickToUploadFile();
     }
 
+    @Step("Getting dropdown")
     public DropDown getDropDown() {
         return new DropDown(driver, "LogType");
 
     }
 
+    @Step("Select file: {fileName}")
     private void selectFile(String fileName) {
         driver.findElement(inputSelectFile).sendKeys(fileName);
     }
 
+    @Step("Click to upload file button")
     public void clickToUploadFile() {
         driver.findElement(uploadFileBtn).click();
     }
 
+    @Step("Getting Data Import Status Text")
     public String getDataImportStatusTxt() {
         return driver.findElement(dataImportStatus).getText();
     }
 
     @Override
     public boolean isPageOpened() {
-        return false;
+        wait.until(ExpectedConditions.elementToBeClickable(uploadFileBtn));
+        return true;
     }
 }

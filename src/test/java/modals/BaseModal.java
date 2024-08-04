@@ -8,7 +8,7 @@ import utils.DriverFactory;
 @Log4j2
 public abstract class BaseModal {
 
-    static WebDriver driver;
+    protected WebDriver driver;
 
     public BaseModal() {
         driver = DriverFactory.getInstance().getDriver();

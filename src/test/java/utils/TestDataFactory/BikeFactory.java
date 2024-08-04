@@ -8,7 +8,7 @@ import models.Bike;
 public class BikeFactory {
     static Faker faker = new Faker();
 
-    public static Bike addNewBike() {
+    public static Bike getAddNewBikeData() {
         return Bike.builder()
                 .bikeName(faker.name().title())
                 .bikeBrand(BikeBrand.CUBE)
@@ -20,6 +20,5 @@ public class BikeFactory {
                 .build();
 
     }
-
 }
 

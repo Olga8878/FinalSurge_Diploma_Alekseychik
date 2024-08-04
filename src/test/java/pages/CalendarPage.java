@@ -4,6 +4,7 @@ package pages;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
 @Log4j2
@@ -19,8 +20,8 @@ public class CalendarPage extends BasePage {
 
     @Step("Open Quick Workout")
     public WorkoutQuickAddPage clickQuickAdd() {
-        driver.findElement(quickAddButton).click();
         log.info("Click Quick Add button by id: " + quickAddButton);
+        driver.findElement(quickAddButton).click();
         return new WorkoutQuickAddPage();
     }
 
@@ -32,7 +33,8 @@ public class CalendarPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return false;
+        wait.until(ExpectedConditions.elementToBeClickable(quickAddButton));
+        return true;
     }
 }
 

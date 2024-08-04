@@ -1,6 +1,9 @@
 package pages;
 
+import enums.Gender;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
 public class OtherCalculatorsPage extends BasePage {
@@ -13,30 +16,37 @@ public class OtherCalculatorsPage extends BasePage {
     private final By errorMsg = By.xpath("//div[contains(@class,'alert alert-error')]");
     private final By trainingCalories = By.xpath("//table[contains(@class,'table table-condensed')]//td[2]");
 
+    @Step("Enter weight 'weight'")
     private void enterWeight(String value) {
         driver.findElement(weightInput).sendKeys(value);
     }
 
+    @Step("Enter height 'height' ")
     private void enterHeight(String value) {
         driver.findElement(heightInput).sendKeys(value);
     }
 
+    @Step("Enter age 'age' ")
     private void enterAge(String value) {
         driver.findElement(ageInput).sendKeys(value);
     }
 
+    @Step("Enter distance")
     private void enterRunDistance(String value) {
         driver.findElement(todaysRunInput).sendKeys(value);
     }
 
+    @Step("Click calculation button")
     private void clickToCalcBtn() {
         driver.findElement(calcBtn).click();
     }
 
+    @Step("Select gender 'gender'")
     private void selectGender(Gender gender) {
         driver.findElement(By.id(gender.getLocator())).click();
     }
 
+    @Step("Enter information for calculation")
     public void enterDataForCalculation(String weight, String height, String age, String runDistance, Gender gender) {
         enterWeight(weight);
         enterHeight(height);
@@ -46,31 +56,20 @@ public class OtherCalculatorsPage extends BasePage {
         clickToCalcBtn();
     }
 
+    @Step("Get error message")
     public String getErrorMsg() {
         return driver.findElement(errorMsg).getText();
     }
 
+    @Step("Get training calories")
     public String getTrainingCalories() {
         return driver.findElement(trainingCalories).getText();
     }
 
-    public enum Gender {
-        MALE("optionsRadios5"),
-        FEMALE("optionsRadios6");
-
-        private final String name;
-
-        Gender(String name) {
-            this.name = name;
-        }
-
-        public String getLocator() {
-            return this.name;
-        }
-    }
 
     @Override
     public boolean isPageOpened() {
-        return false;
+        wait.until(ExpectedConditions.elementToBeClickable(calcBtn));
+        return true;
     }
 }

@@ -7,7 +7,7 @@ public class WorkoutQuickAddFactory {
 
     static Faker faker = new Faker();
 
-    public static WorkoutQuickAdd fillWorkoutQuickData() {
+    public static WorkoutQuickAdd getWorkoutQuickData() {
         return WorkoutQuickAdd.builder()
                 .date("24/07/2024")
                 .time("06:15 AM")

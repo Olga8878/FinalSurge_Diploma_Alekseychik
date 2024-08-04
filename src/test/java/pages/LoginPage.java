@@ -4,8 +4,6 @@ import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchWindowException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 import utils.DriverFactory;
@@ -24,32 +22,28 @@ public class LoginPage extends BasePage {
         super();
     }
 
-    @Override
-    public boolean isPageOpened() {
-        return false;
-    }
 
-    @Step
+    @Step("Open url")
     public void openURL() {
         driver.get(PropertyReader.getProperty("base_url"));
     }
 
-    @Step
+    @Step("Set email 'email'")
     private void setEmailValue(String email) {
         driver.findElement(loginEmail).sendKeys(email);
     }
 
-    @Step
+    @Step("Set password 'password'")
     private void setPasswordValue(String password) {
         driver.findElement(loginPassword).sendKeys(password);
     }
 
-    @Step
+    @Step("Click signUp Button")
     private void clickSignInButton() {
         driver.findElement(signInButton).click();
     }
 
-    @Step
+    @Step("Enter login and password")
     public DashboardPage login(String email, String password) {
         logger.info("Log in with email = {}, password = {}", email, password);
         openURL();
@@ -63,27 +57,9 @@ public class LoginPage extends BasePage {
         DriverFactory.getInstance().getDriver().getCurrentUrl();
     }
 
-    public void closeSubWindows() {
-        try {
-            closeAllSubWindows();
-        } catch (NoSuchWindowException noSuchWindowException) {
-            logger.warn("No such window exception: {}", noSuchWindowException.getMessage());
-        } catch (WebDriverException ex) {
-            logger.warn("It looks like driver is not available: {}", ex.getMessage());
-        } catch (Exception ex) {
-            logger.warn("Unexpected error during closing: {}", ex.getMessage());
-        }
-    }
-
-    private void closeAllSubWindows() {
-        String defaultWindow = DriverFactory.getInstance().getInitialWindowHandle();
-        Set<String> windows = driver.getWindowHandles();
-        for (String window : windows) {
-            if (!window.equals(defaultWindow)) {
-                driver.switchTo().window(window);
-                driver.close();
-            }
-        }
-        driver.switchTo().window(defaultWindow);
+    @Override
+    public boolean isPageOpened() {
+        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
+        return true;
     }
 }

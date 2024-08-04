@@ -13,7 +13,7 @@ public class ImportDataTests extends BaseTest {
     public ImportDataPage importDataPage;
 
     @BeforeMethod(alwaysRun = true)
-    public void loginAndMoveToPrintWorkouts() {
+    public void loginAndMoveToImportData() {
         DashboardPage dashboardPage = loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
         importDataPage = dashboardPage.navigateToImportData();
     }

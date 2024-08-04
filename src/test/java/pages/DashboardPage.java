@@ -14,7 +14,7 @@ public class DashboardPage extends BasePage {
     public final By gearRoutesHeader = By.xpath("//a[text()='Gear & Routes']");
     public final By bike = By.xpath("//a[text()='Bikes']");
     public final By dashboardButton = By.xpath("//*[@class='icsw16-home']");
-    public final By calendar  = By.xpath("//i[contains(@class, '-calendar')]");
+    public final By calendar = By.xpath("//i[contains(@class, '-calendar')]");
 
     public final By workoutCalculators = By.cssSelector("[data-reveal-id='IntensityCalc']");
     public final By otherCalculators = By.cssSelector("[data-reveal-id='OtherCalc']");
@@ -26,22 +26,6 @@ public class DashboardPage extends BasePage {
         super();
     }
 
-    @Step
-    public WorkoutQuickAddPage navigateToAddWorkout() {
-        moveToWorkoutHeader();
-        driver.findElement(addWorkout).click();
-        return new WorkoutQuickAddPage();
-    }
-
-    private void moveToWorkoutHeader() {
-        Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(workoutHeader)).build().perform();
-    }
-
-    public void moveToGearRoutesHeader() {
-        Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(gearRoutesHeader)).build().perform();
-    }
 
     @Step
     public EquipmentBikesPage navigateToAddBike() {
@@ -59,21 +43,10 @@ public class DashboardPage extends BasePage {
         return new ImportDataPage();
     }
 
-    @Step
-    public boolean dashboardButtonIsDisplayed() {
-        return driver.findElement(dashboardButton).isDisplayed();
-    }
-
     @Step("Clicking 'Calendar'")
     public CalendarPage clickCalendar() {
         driver.findElement(calendar).click();
         return new CalendarPage();
-    }
-
-    @Step("Clicking 'Workout Calculators'")
-    public WorkoutQuickAddPage clickWorkoutCalculators() {
-        driver.findElement(workoutCalculators).click();
-        return new WorkoutQuickAddPage();
     }
 
     @Step("Clicking 'Other Calculators'")
@@ -87,11 +60,6 @@ public class DashboardPage extends BasePage {
     public PrintWorkoutsPage clickPrintWorkouts() {
         driver.findElement(printWorkoutsLink).click();
         return new PrintWorkoutsPage();
-    }
-
-    @Step("Clicking 'Logout' link")
-    public void clickLogoutButton() {
-        driver.findElement(logoutLink).click();
     }
 
     @Override

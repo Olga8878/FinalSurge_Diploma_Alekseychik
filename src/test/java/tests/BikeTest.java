@@ -1,6 +1,5 @@
 package tests;
 
-import jdk.jfr.Description;
 import modals.BikeModal;
 import models.Bike;
 import org.testng.Assert;
@@ -19,8 +18,7 @@ public class BikeTest extends BaseTest {
     protected final String EXPECTED_TEXT = "You have no Current bikes. Add one now by using the Add New Bike form.";
 
     @BeforeMethod(alwaysRun = true)
-    public void initialize() {
-        LoginPage loginPage = new LoginPage();
+    public void loginAndMoveToBike() {
         dashboardPage = loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
         equipmentBikesPage = dashboardPage.navigateToAddBike();
         bikeModal = new BikeModal();
@@ -28,7 +26,7 @@ public class BikeTest extends BaseTest {
 
     @Test(groups = "positive")
     public void addAndDeleteNewBikeTest() {
-        Bike myBike = BikeFactory.addNewBike();
+        Bike myBike = BikeFactory.getAddNewBikeData();
         bikeModal.fillForm(myBike);
         bikeModal.clickAddBikeButton();
         equipmentBikesPage.clickEditButton();

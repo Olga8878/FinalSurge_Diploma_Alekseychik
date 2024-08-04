@@ -7,9 +7,8 @@ import org.testng.annotations.*;
 import pages.LoginPage;
 import utils.DriverFactory;
 import utils.InvokedListener;
-import utils.TestListener;
 
-@Listeners({TestListener.class, InvokedListener.class})
+@Listeners({InvokedListener.class})
 public abstract class BaseTest {
     private WebDriver driver;
     protected LoginPage loginPage;

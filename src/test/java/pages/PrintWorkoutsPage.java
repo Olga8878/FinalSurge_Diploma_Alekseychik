@@ -1,6 +1,8 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
 public class PrintWorkoutsPage extends BasePage {
@@ -13,34 +15,30 @@ public class PrintWorkoutsPage extends BasePage {
     private final By error = By.xpath("//div[@class='alert alert-error']");
 
     public void print(String startDate, String endDate) {
-        switchToFrame();
+        switchToFrame(iframe);
         enterStartDate(startDate);
         enterEndDate(endDate);
         clickPrintWorkouts();
         switchToSecondWindow();
     }
 
+    @Step("Get error message")
     public String getErrorText() {
         return driver.findElement(error).getText();
     }
 
-    private void switchToSecondWindow() {
-        Object[] windowHandles = driver.getWindowHandles().toArray();
-        driver.switchTo().window((String) windowHandles[1]);
-    }
 
-    private void switchToFrame() {
-        driver.switchTo().frame(driver.findElement(iframe));
-    }
-
+    @Step("Enter start date")
     private void enterStartDate(String startDate) {
         driver.findElement(printStartDate).sendKeys(startDate);
     }
 
+    @Step("Enter end date")
     private void enterEndDate(String endDate) {
         driver.findElement(printEndDate).sendKeys(endDate);
     }
 
+    @Step("Click print workout button")
     private void clickPrintWorkouts() {
         driver.findElement(printWorkoutsBtn).click();
     }
@@ -51,6 +49,7 @@ public class PrintWorkoutsPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return false;
+        wait.until(ExpectedConditions.elementToBeClickable(printWorkoutsBtn));
+        return true;
     }
 }
