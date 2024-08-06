@@ -9,16 +9,12 @@ import pages.base.BasePage;
 public class DashboardPage extends BasePage {
 
     public final By workoutHeader = By.xpath("//a[text()='Workouts']");
-    public final By addWorkout = By.xpath("//a[text()='Add Workout']");
     public final By importData = By.xpath("//a[text()='Import Data']");
     public final By gearRoutesHeader = By.xpath("//a[text()='Gear & Routes']");
     public final By bike = By.xpath("//a[text()='Bikes']");
     public final By dashboardButton = By.xpath("//*[@class='icsw16-home']");
     public final By calendar = By.xpath("//i[contains(@class, '-calendar')]");
-
-    public final By workoutCalculators = By.cssSelector("[data-reveal-id='IntensityCalc']");
     public final By otherCalculators = By.cssSelector("[data-reveal-id='OtherCalc']");
-    public final By logoutLink = By.xpath("//a[text()='Logout']");
     public final By otherCalculatorsFrame = By.id("OtherCalciFrame");
     public final By printWorkoutsLink = By.xpath("//a[@data-reveal-id='PrintWorkouts']/i");
 

@@ -50,7 +50,6 @@ public class WorkoutQuickAddPage extends BasePage {
     public WorkoutQuickAddPage clickSaveButton() {
         log.info("Click Add Workout button by id: " + addWorkoutButton);
         driver.findElement(addWorkoutButton).click();
-
         return new WorkoutQuickAddPage();
     }
 

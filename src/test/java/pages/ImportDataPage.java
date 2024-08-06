@@ -20,9 +20,9 @@ public class ImportDataPage extends BasePage {
     }
 
     @Step("Upload file: {fileName}")
-    public void uploadFile(String fileName) {
+    public ImportDataPage uploadFile(String fileName) {
         selectFile(fileName);
-        clickToUploadFile();
+        return clickToUploadFile();
     }
 
     @Step("Getting dropdown")
@@ -32,13 +32,15 @@ public class ImportDataPage extends BasePage {
     }
 
     @Step("Select file: {fileName}")
-    private void selectFile(String fileName) {
+    private ImportDataPage selectFile(String fileName) {
         driver.findElement(inputSelectFile).sendKeys(fileName);
+        return this;
     }
 
     @Step("Click to upload file button")
-    public void clickToUploadFile() {
+    public ImportDataPage clickToUploadFile() {
         driver.findElement(uploadFileBtn).click();
+        return this;
     }
 
     @Step("Getting Data Import Status Text")

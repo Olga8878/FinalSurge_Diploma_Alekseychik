@@ -10,7 +10,6 @@ import pages.base.BaseTest;
 import utils.PropertyReader;
 import utils.TestDataFactory.BikeFactory;
 
-
 public class BikeTest extends BaseTest {
     protected BikeModal bikeModal;
     protected EquipmentBikesPage equipmentBikesPage;
@@ -36,6 +35,3 @@ public class BikeTest extends BaseTest {
         Assert.assertEquals(equipmentBikesPage.getNoBikesText(), EXPECTED_TEXT);
     }
 }
-
-
-

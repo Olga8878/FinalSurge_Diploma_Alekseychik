@@ -10,11 +10,11 @@ import org.openqa.selenium.WebElement;
 @Log4j2
 public class BikeModal extends BaseModal {
 
-    private final static By BikeBrand = By.xpath("//span[text()='Select Brand...']");
-    private static final String bikeBrandLocator = "//ul[@class='select2-results']//div[contains(.,'%s')]";
-    private final static By StartingDistance = By.id("StartDist");
+    private final  By BIKE_BRAND = By.xpath("//span[text()='Select Brand...']");
+    private final String BIKE_BRAND_LOCATOR = "//ul[@class='select2-results']//div[contains(.,'%s')]";
+    private final  By STARTING_DISTANCE = By.id("StartDist");
 
-    private final static By AddBikeButton = By.id("saveButton");
+    private final  By ADD_BIKE_BUTTON = By.id("saveButton");
 
     public BikeModal() {
         super();
@@ -23,8 +23,8 @@ public class BikeModal extends BaseModal {
     @Step("Selecting a bike brand")
     public void selectBikeBrand(String optionName) {
         log.info("Selecting a bike brand");
-        driver.findElement(BikeBrand).click();
-        WebElement optionToClick = driver.findElement(By.xpath(String.format(bikeBrandLocator, optionName)));
+        driver.findElement(BIKE_BRAND).click();
+        WebElement optionToClick = driver.findElement(By.xpath(String.format(BIKE_BRAND_LOCATOR, optionName)));
         optionToClick.click();
     }
 
@@ -36,7 +36,7 @@ public class BikeModal extends BaseModal {
         new Input(driver, "ShoeCost").setValue(bike.getCost());
         new Input(driver, "ShoeDate").setValue(bike.getDatePurchased());
         log.info("clearing prefilled input");
-        driver.findElement(StartingDistance).clear();
+        driver.findElement(STARTING_DISTANCE).clear();
         new Input(driver, "StartDist").setValue(bike.getDistance());
         new Input(driver, "ShoeNotes").setValue(bike.getNotes());
         return this;
@@ -45,7 +45,7 @@ public class BikeModal extends BaseModal {
     @Step("Clicking button 'Add Bike'")
     public void clickAddBikeButton() {
         log.info("clicking button 'Add Bike'");
-        driver.findElement(AddBikeButton).click();
+        driver.findElement(ADD_BIKE_BUTTON).click();
     }
 }
 
