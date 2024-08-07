@@ -13,12 +13,11 @@ import utils.TestDataFactory.BikeFactory;
 public class BikeTest extends BaseTest {
     protected BikeModal bikeModal;
     protected EquipmentBikesPage equipmentBikesPage;
-    protected DashboardPage dashboardPage;
     protected final String EXPECTED_TEXT = "You have no Current bikes. Add one now by using the Add New Bike form.";
 
     @BeforeMethod(alwaysRun = true)
     public void loginAndMoveToBike() {
-        dashboardPage = loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
+        DashboardPage dashboardPage = loginPage.login(PropertyReader.getProperty("email"), PropertyReader.getProperty("password"));
         equipmentBikesPage = dashboardPage.navigateToAddBike();
         bikeModal = new BikeModal();
     }

@@ -10,11 +10,12 @@ import utils.InvokedListener;
 
 @Listeners({InvokedListener.class})
 public abstract class BaseTest {
+
     private WebDriver driver;
     protected LoginPage loginPage;
 
     @BeforeClass(alwaysRun = true)
-    public void setUp(ITestContext testContext) {
+    public synchronized void setUp(ITestContext testContext) {
         driver = DriverFactory.getInstance().getDriver();
         testContext.setAttribute("driver", driver);
         loginPage = new LoginPage();
@@ -39,12 +40,12 @@ public abstract class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void clearCookies() {
         driver.manage().deleteAllCookies();
-        ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.clear();"));
-        ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));
+        ((JavascriptExecutor) driver).executeScript("window.localStorage.clear();");
+        ((JavascriptExecutor) driver).executeScript("window.sessionStorage.clear();");
     }
 
     @AfterClass(alwaysRun = true)
-    public void tearDownDriver() {
+    public synchronized void tearDownDriver() {
         DriverFactory.getInstance().tearDown();
     }
 }

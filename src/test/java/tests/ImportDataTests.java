@@ -9,7 +9,6 @@ import pages.ImportDataPage;
 import utils.PropertyReader;
 
 public class ImportDataTests extends BaseTest {
-
     public ImportDataPage importDataPage;
 
     @BeforeMethod(alwaysRun = true)
@@ -28,7 +27,6 @@ public class ImportDataTests extends BaseTest {
 
     @Test(groups = "positive")
     public void verifyUploadFileOnImportData() {
-
         String fileName = System.getProperty("user.dir") + "/src/test/resources/example.tcx";
         importDataPage.getDropDown().selectOption("MySwimBikeRun");
         importDataPage.uploadFile(fileName);

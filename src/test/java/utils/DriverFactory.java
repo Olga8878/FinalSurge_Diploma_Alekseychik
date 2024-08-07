@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +16,7 @@ public class DriverFactory {
     private final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private final ThreadLocal<Map<WebDriver, String>> driverMap = new ThreadLocal<>();
 
-    public static DriverFactory getInstance() {
+    public static synchronized DriverFactory getInstance() {
         DriverFactory localInstance = instance;
         if (localInstance == null) {
             synchronized (DriverFactory.class) {
@@ -31,7 +30,7 @@ public class DriverFactory {
     }
 
     @SneakyThrows
-    public WebDriver getDriver() {
+    public synchronized WebDriver getDriver() {
         if (isDriverNull()) {
             WebDriver webDriver;
             switch (PropertyReader.getProperty("browser_name")) {
@@ -74,7 +73,7 @@ public class DriverFactory {
         return driverMap.get().get(getDriver());
     }
 
-    public void tearDown() {
+    public synchronized void tearDown() {
         if (!isDriverNull()) {
             try {
                 driver.get().quit();
