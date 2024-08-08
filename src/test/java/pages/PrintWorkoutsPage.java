@@ -14,12 +14,13 @@ public class PrintWorkoutsPage extends BasePage {
     private final By printWorkoutsBtn = By.xpath("//input[@id='saveButtonPrint']");
     private final By error = By.xpath("//div[@class='alert alert-error']");
 
-    public void print(String startDate, String endDate) {
+    public PrintWorkoutsPage print(String startDate, String endDate) {
         switchToFrame(iframe);
-        enterStartDate(startDate);
-        enterEndDate(endDate);
-        clickPrintWorkouts();
-        switchToSecondWindow();
+        enterStartDate(startDate).
+                enterEndDate(endDate).
+                clickPrintWorkouts().
+                switchToSecondWindow();
+        return this;
     }
 
     @Step("Get error message")
@@ -29,18 +30,21 @@ public class PrintWorkoutsPage extends BasePage {
 
 
     @Step("Enter start date")
-    private void enterStartDate(String startDate) {
+    private PrintWorkoutsPage enterStartDate(String startDate) {
         driver.findElement(printStartDate).sendKeys(startDate);
+        return this;
     }
 
     @Step("Enter end date")
-    private void enterEndDate(String endDate) {
+    private PrintWorkoutsPage enterEndDate(String endDate) {
         driver.findElement(printEndDate).sendKeys(endDate);
+        return this;
     }
 
     @Step("Click print workout button")
-    private void clickPrintWorkouts() {
+    private PrintWorkoutsPage clickPrintWorkouts() {
         driver.findElement(printWorkoutsBtn).click();
+        return this;
     }
 
     public boolean isLogoDisplayed() {

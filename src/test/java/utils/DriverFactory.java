@@ -16,7 +16,7 @@ public class DriverFactory {
     private final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private final ThreadLocal<Map<WebDriver, String>> driverMap = new ThreadLocal<>();
 
-    public static synchronized DriverFactory getInstance() {
+    public static DriverFactory getInstance() {
         DriverFactory localInstance = instance;
         if (localInstance == null) {
             synchronized (DriverFactory.class) {
@@ -73,7 +73,7 @@ public class DriverFactory {
         return driverMap.get().get(getDriver());
     }
 
-    public synchronized void tearDown() {
+    public void tearDown() {
         if (!isDriverNull()) {
             try {
                 driver.get().quit();

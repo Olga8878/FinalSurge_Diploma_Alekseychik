@@ -17,43 +17,49 @@ public class OtherCalculatorsPage extends BasePage {
     private final By trainingCalories = By.xpath("//table[contains(@class,'table table-condensed')]//td[2]");
 
     @Step("Enter weight 'weight'")
-    private void enterWeight(String value) {
+    private OtherCalculatorsPage enterWeight(String value) {
         driver.findElement(weightInput).sendKeys(value);
+        return this;
     }
 
     @Step("Enter height 'height' ")
-    private void enterHeight(String value) {
+    private OtherCalculatorsPage enterHeight(String value) {
         driver.findElement(heightInput).sendKeys(value);
+        return this;
     }
 
     @Step("Enter age 'age' ")
-    private void enterAge(String value) {
+    private OtherCalculatorsPage enterAge(String value) {
         driver.findElement(ageInput).sendKeys(value);
+        return this;
     }
 
     @Step("Enter distance")
-    private void enterRunDistance(String value) {
+    private OtherCalculatorsPage enterRunDistance(String value) {
         driver.findElement(todaysRunInput).sendKeys(value);
+        return this;
     }
 
     @Step("Click calculation button")
-    private void clickToCalcBtn() {
+    private OtherCalculatorsPage clickToCalcBtn() {
         driver.findElement(calcBtn).click();
+        return this;
     }
 
     @Step("Select gender 'gender'")
-    private void selectGender(Gender gender) {
+    private OtherCalculatorsPage selectGender(Gender gender) {
         driver.findElement(By.id(gender.getLocator())).click();
+        return this;
     }
 
     @Step("Enter information for calculation")
-    public void enterDataForCalculation(String weight, String height, String age, String runDistance, Gender gender) {
-        enterWeight(weight);
-        enterHeight(height);
-        enterAge(age);
-        enterRunDistance(runDistance);
-        selectGender(gender);
-        clickToCalcBtn();
+    public OtherCalculatorsPage enterDataForCalculation(String weight, String height, String age, String runDistance, Gender gender) {
+        return enterWeight(weight).
+                enterHeight(height).
+                enterAge(age).
+                enterRunDistance(runDistance).
+                selectGender(gender).
+                clickToCalcBtn();
     }
 
     @Step("Get error message")
