@@ -28,8 +28,7 @@ public class ImportDataTests extends BaseTest {
     @Test(groups = "positive")
     public void verifyUploadFileOnImportData() {
         String fileName = System.getProperty("user.dir") + "/src/test/resources/example.tcx";
-        importDataPage.getDropDown().selectOption("MySwimBikeRun");
-        importDataPage.uploadFile(fileName);
+        importDataPage.uploadFile(fileName, "MySwimBikeRun");
         Assert.assertEquals(importDataPage.getDataImportStatusTxt(),
                 "Your data import is complete! Your imported workouts will now be displayed on your calendar.", "Correct import");
     }

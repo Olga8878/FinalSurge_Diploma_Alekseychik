@@ -20,13 +20,14 @@ public class ImportDataPage extends BasePage {
     }
 
     @Step("Upload file: {fileName}")
-    public ImportDataPage uploadFile(String fileName) {
+    public ImportDataPage uploadFile(String fileName, String option) {
+        getDropDown().selectOption(option);
         selectFile(fileName);
         return clickToUploadFile();
     }
 
     @Step("Getting dropdown")
-    public DropDown getDropDown() {
+    private DropDown getDropDown() {
         return new DropDown(driver, "LogType");
 
     }

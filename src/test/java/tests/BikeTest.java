@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import pages.*;
 import pages.base.BaseTest;
 import utils.PropertyReader;
-import utils.TestDataFactory.BikeFactory;
+import utils.testDataFactory.BikeFactory;
 
 public class BikeTest extends BaseTest {
     protected BikeModal bikeModal;

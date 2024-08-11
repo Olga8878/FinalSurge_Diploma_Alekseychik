@@ -9,7 +9,6 @@ import pages.base.BasePage;
 import utils.DriverFactory;
 import utils.PropertyReader;
 
-import java.util.Set;
 
 public class LoginPage extends BasePage {
     protected final Logger logger = LogManager.getLogger(this.getClass().getName());
@@ -51,10 +50,6 @@ public class LoginPage extends BasePage {
         setPasswordValue(password);
         clickSignInButton();
         return new DashboardPage();
-    }
-
-    public void checkWebDriver() {
-        DriverFactory.getInstance().getDriver().getCurrentUrl();
     }
 
     @Override

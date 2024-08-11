@@ -25,15 +25,6 @@ public abstract class BaseTest {
     public void prepareBrowser() {
         if (loginPage != null) {
             loginPage.closeSubWindows();
-            restartCrashedBrowser();
-        }
-    }
-
-    private void restartCrashedBrowser() {
-        try {
-            loginPage.checkWebDriver();
-        } catch (Throwable throwable) {
-            DriverFactory.getInstance().tearDown();
         }
     }
 

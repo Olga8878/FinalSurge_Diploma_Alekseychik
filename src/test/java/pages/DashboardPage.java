@@ -44,6 +44,10 @@ public class DashboardPage extends BasePage {
         driver.findElement(calendar).click();
         return new CalendarPage();
     }
+    public DashboardPage navigateToDashboardPage(){
+        driver.findElement(dashboardButton).click();
+        return new DashboardPage();
+    }
 
     @Step("Clicking 'Other Calculators'")
     public OtherCalculatorsPage clickOtherCalculators() {

@@ -57,8 +57,10 @@ public class OtherCalculatorsTests extends BaseTest {
     public void verifyCalculatorTrainingCalories() {
         String runDistance = "5";
         String weightLbs = "30";
+        String height = "2";
+        String age = "5";
         String expectedTrainingCalories = Math.round((Integer.parseInt(weightLbs) * 0.453592) * (Integer.parseInt(runDistance) * 1.60934)) + " kCal";
-        otherCalculatorsPage.enterDataForCalculation(weightLbs, "2", "5", runDistance, Gender.FEMALE);
+        otherCalculatorsPage.enterDataForCalculation(weightLbs, height, age, runDistance, Gender.FEMALE);
         Assert.assertEquals(otherCalculatorsPage.getTrainingCalories(), expectedTrainingCalories, "Traning Calories is NOT calculated correctly.");
     }
 }

@@ -1,4 +1,4 @@
-package utils.TestDataFactory;
+package utils.testDataFactory;
 
 import com.github.javafaker.Faker;
 import enums.BikeBrand;

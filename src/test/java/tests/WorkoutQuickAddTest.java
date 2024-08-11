@@ -1,7 +1,7 @@
 package tests;
 
 import models.WorkoutQuickAdd;
-import utils.TestDataFactory.WorkoutQuickAddFactory;
+import utils.testDataFactory.WorkoutQuickAddFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
