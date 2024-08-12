@@ -6,9 +6,9 @@ on:
     - cron: '40 10 * * 1,5'
     - cron: '30 10 2-31/2 * 4'
   push:
-    branches: [ "feature_Alekseychik" ]
+    branches: [ "master", "feature_Alekseychik" ]
   pull_request:
-    branches: [ "feature_Alekseychik" ]
+    branches: [ "master", "feature_Alekseychik" ]
   workflow_dispatch:
     inputs:
       browser:
