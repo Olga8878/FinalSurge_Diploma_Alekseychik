@@ -1,0 +1,113 @@
+name: TestRail Tests
+
+on:
+  schedule:
+    - cron: '30 00 1-31/2 * *'
+    - cron: '40 10 * * 1,5'
+    - cron: '30 10 2-31/2 * 4'
+  push:
+    branches: [ "master", "feature_Alekseychik" ]
+  pull_request:
+    branches: [ "master", "feature_Alekseychik" ]
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Choose a browser'
+        required: true
+        default: 'chrome'
+        type: choice
+        options:
+          - chrome
+          - edge
+          - firefox
+      suite:
+        description: 'Choose a test suite'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke
+          - regression
+          - all
+
+jobs:
+  all_suite:
+    runs-on: windows-latest
+    if: github.event.schedule == '30 10 2-31/2 * 4' || github.event.inputs.suite == 'all'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+          cache: maven
+
+      - name: Run ALL tests
+        run: mvn -B clean test -Dsuite=api -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
+
+      - name: Generate Allure report
+        if: always()
+        run: mvn allure:report
+
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ github.run_id }}
+          path: target/allure-results
+
+  smoke_suite:
+    runs-on: windows-latest
+    if: github.event.schedule == '40 10 * * 1,5' || github.event.inputs.suite == 'smoke'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+          cache: maven
+
+      - name: Run Smoke tests
+        run: mvn -B clean test -Dsuite=smoke -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
+
+      - name: Generate Allure report
+        if: always()
+        run: mvn allure:report
+
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ github.run_id }}
+          path: target/allure-results
+
+  regression_suite:
+    runs-on: windows-latest
+    if: github.event.schedule == '30 10 2-31/2 * 4' || github.event.inputs.suite == 'regression'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+          cache: maven
+
+      - name: Run Regression tests
+        run: mvn -B clean test -Dsuite=regression -Dbrowser=${{ github.event.inputs.browser || 'edge' }} 
+
+      - name: Generate Allure report
+        if: always()
+        run: mvn allure:report
+
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ github.run_id }}
+          path: target/allure-results
