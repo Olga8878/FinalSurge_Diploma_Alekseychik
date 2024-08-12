@@ -45,7 +45,7 @@ jobs:
           cache: maven
 
       - name: Run ALL tests
-        run: mvn -B clean test -Dsuite=api -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
+        run: mvn -B clean test -Dsuite=all -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
 
       - name: Generate Allure report
         if: always()
