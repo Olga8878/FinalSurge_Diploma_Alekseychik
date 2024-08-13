@@ -17,6 +17,7 @@ pipeline {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
         choice(name: 'SUITE_NAME', choices: ['smoke.xml','regression.xml', 'all.xml'], description: 'Choice suiteXmlFile')
         choice(name: 'BROWSER', choices: ['chrome', 'firefox', 'edge'], description: 'Select a browser')
+        booleanParam(name: 'IS_HEADLESS', defaultValue: false, description: 'Toggle headless mode')
     }
 
     stages {
