@@ -12,7 +12,7 @@ pipeline {
             parameterizedCron('''
             0 9 * * 1,3,5 %SUITE=smoke;%BROWSER=chrome;%IS_HEADLESS=false
             00 23 1-31/2 * * %SUITE=regression;%BROWSER=firefox;%IS_HEADLESS=false;
-            0 9 * * 1,3,5 %SUITE=smoke;%BROWSER=chrome;%IS_HEADLESS=false
+            0 9 * * 1,2,5 %SUITE=smoke;%BROWSER=chrome;%IS_HEADLESS=false
             ''')
         }
 
